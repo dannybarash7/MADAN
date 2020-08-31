@@ -2,9 +2,9 @@ import subprocess
 import sys
 import time
 
-MADAN_FOLDER = "/users/danny.barash/MADAN/"
+from cyclegan.consts import MADAN_FOLDER
 
-#sys.path.append(MADAN_FOLDER)
+sys.path.append(MADAN_FOLDER)
 from cyclegan.options.train_options import TrainOptions
 from cyclegan.data import CreateDataLoader
 from cyclegan.models import create_model

@@ -1,9 +1,14 @@
 import sys
 
+from cyclegan.consts import MADAN_FOLDER
+sys.path.append(MADAN_FOLDER)
 import torch.utils.data
-from data.base_data_loader import BaseDataLoader
 
-sys.path.append('/home/dannyb/Downloads/madan/MADAN')
+from cyclegan.data.base_data_loader import BaseDataLoader
+
+from cyclegan.consts import MADAN_FOLDER
+
+
 from cycada.transforms import augment_collate
 
 

@@ -11,7 +11,9 @@ import torchvision
 from PIL import Image
 from tensorboardX import SummaryWriter
 
-sys.path.append('/users/danny.barash/MADAN')
+from cyclegan.consts import MADAN_FOLDER
+
+sys.path.append(MADAN_FOLDER)
 
 from cycada.data.data_loader import get_fcn_dataset as get_dataset
 from cycada.models import get_model
