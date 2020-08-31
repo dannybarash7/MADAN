@@ -359,13 +359,14 @@ class CycleGANSemanticModel(BaseModel):
 			# D21 loss
 			if opt.CCD_frozen_epoch != -1 and opt.current_epoch > opt.CCD_frozen_epoch:
 				self.loss_G_s1s21 = self.criterionGAN(self.netD_21(self.fake_A_21), True)
-				self.loss_G += self.loss_G_s1s21 * opt.D1D2_weight
+				#Danny: changed D1D2_weight to CCD_weight
+				self.loss_G += self.loss_G_s1s21 * opt.CCD_weight
 			else:
 				self.loss_G_s1s21 = 0
 			
 			if opt.CCD_frozen_epoch != -1 and opt.current_epoch > opt.CCD_frozen_epoch:
 				self.loss_G_s2s12 = self.criterionGAN(self.netD_12(self.fake_A_12), True)
-				self.loss_G += self.loss_G_s2s12 * opt.D1D2_weight
+				self.loss_G += self.loss_G_s2s12 * opt.CCD_weight
 			else:
 				self.loss_G_s2s12 = 0
 		
