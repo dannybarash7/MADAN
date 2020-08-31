@@ -1,0 +1,1 @@
+MADAN_FOLDER = "/home/dannyb/Downloads/madan/MADAN/"

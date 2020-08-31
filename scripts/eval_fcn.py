@@ -3,7 +3,7 @@ import sys
 
 from torchvision.transforms import transforms
 
-from cyclegan.train import MADAN_FOLDER
+from cyclegan.consts import MADAN_FOLDER
 
 sys.path.append(MADAN_FOLDER)
 import json

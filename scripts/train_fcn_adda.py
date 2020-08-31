@@ -12,7 +12,7 @@ import torch.nn.functional as F
 from tensorboardX import SummaryWriter
 from torch.autograd import Variable
 
-from cyclegan.train import MADAN_FOLDER
+from cyclegan.consts import MADAN_FOLDER
 
 sys.path.append(MADAN_FOLDER)
 
