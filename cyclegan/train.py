@@ -2,11 +2,13 @@ import subprocess
 import sys
 import time
 
-sys.path.append("/users/danny.barash/MADAN/scripts/CycleGAN/")
-from options.train_options import TrainOptions
-from data import CreateDataLoader
-from models import create_model
-from util.visualizer import Visualizer
+MADAN_FOLDER = "/users/danny.barash/MADAN/"
+
+#sys.path.append(MADAN_FOLDER)
+from cyclegan.options.train_options import TrainOptions
+from cyclegan.data import CreateDataLoader
+from cyclegan.models import create_model
+from cyclegan.util.visualizer import Visualizer
 import torch
 import logging
 

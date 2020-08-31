@@ -1,11 +1,11 @@
 import sys
 
 import torch.utils.data
-#from data.base_data_loader import BaseDataLoader
-sys.path.append('/users/danny.barash/MADAN')
+from data.base_data_loader import BaseDataLoader
+
+sys.path.append('/home/dannyb/Downloads/madan/MADAN')
 from cycada.transforms import augment_collate
-from cyclegan.data.base_data_loader import BaseDataLoader
-#:from cyclegan.data import *
+
 
 
 def CreateDataLoader(opt):

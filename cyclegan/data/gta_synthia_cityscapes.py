@@ -109,8 +109,12 @@ class GTASynthiaCityscapesDataset(BaseDataset):
 		A_label_path_1 = self.A_labels_1[index % self.A_size_1]
 		A_label_path_2 = self.A_labels_2[index % self.A_size_2]
 		
-		A_label_1 = Image.open(A_label_path_1).convert('L')
-		A_label_2 = Image.open(A_label_path_2).convert('L')
+		A_label_1 = Image.open(A_label_path_1)
+		A_label_2 = Image.open(A_label_path_2)
+		#Danny:
+		#A_label_1 = Image.open(A_label_path_1).convert('L')
+		#A_label_2 = Image.open(A_label_path_2).convert('L')
+		
 		
 		# remaping label for synthia
 		A_label_1 = np.asarray(A_label_1)

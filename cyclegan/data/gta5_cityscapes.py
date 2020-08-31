@@ -1,4 +1,3 @@
-import pdb
 import os.path
 import random
 
@@ -83,18 +82,12 @@ class GTAVCityscapesDataset(BaseDataset):
 	
 	def __getitem__(self, index):
 		A_path = self.A_paths[index % self.A_size]
-		#print("A_path ",A_path)
-		#print("self.opt.serial_batches ",self.opt.serial_batches)
-		#print("self.B_size ",self.B_size)
 		if self.opt.serial_batches:
 			index_B = index % self.B_size
 		else:
 			index_B = random.randint(0, self.B_size - 1)
-		#print("index_B ",index_B)
 		B_path = self.B_paths[index_B]
 		
-		#pdb.set_trace()
-		#print("len(self.B_labels) ",len(self.B_labels))
 		A_label_path = self.A_labels[index % self.A_size]
 		B_label_path = self.B_labels[index_B]
 		

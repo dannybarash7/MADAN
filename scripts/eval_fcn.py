@@ -3,7 +3,9 @@ import sys
 
 from torchvision.transforms import transforms
 
-sys.path.append('/nfs/project/libo_iMADAN')
+from cyclegan.train import MADAN_FOLDER
+
+sys.path.append(MADAN_FOLDER)
 import json
 import click
 import numpy as np

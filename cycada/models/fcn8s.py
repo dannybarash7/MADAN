@@ -56,6 +56,7 @@ class VGG16_FCN8s(nn.Module):
 			batch_norm = False
 		else:
 			batch_norm = True
+		#danny: cfg to cfgs
 		self.vgg = make_layers(vgg.cfgs['D'], batch_norm=False)
 		self.vgg_head = nn.Sequential(
 			nn.Conv2d(512, 4096, 7),

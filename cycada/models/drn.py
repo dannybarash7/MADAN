@@ -158,6 +158,7 @@ class DRN(nn.Module):
 		
 		if pretrained:
 			if not weights_init is None:
+				#danny: laptop: state_dict = torch.load(weights_init,map_location=torch.device('cpu'))
 				state_dict = torch.load(weights_init)
 				print('Using state dict from', weights_init)
 			else:
