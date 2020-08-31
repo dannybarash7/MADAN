@@ -11,7 +11,7 @@ import torchvision
 from PIL import Image
 from tensorboardX import SummaryWriter
 
-sys.path.append('/nfs/project/libo_iMADAN')
+sys.path.append('/users/danny.barash/MADAN')
 
 from cycada.data.data_loader import get_fcn_dataset as get_dataset
 from cycada.models import get_model
@@ -46,39 +46,40 @@ def supervised_loss(score, label, weights=None):
 	return loss
 
 
-@click.command()
-@click.argument('output')
-@click.option('--dataset', required=True, multiple=True)
-@click.option('--datadir', default="", type=click.Path(exists=True))
-@click.option('--batch_size', '-b', default=1)
-@click.option('--lr', '-l', default=0.001)
-@click.option('--step', type=int)
-@click.option('--iterations', '-i', default=100000)
-@click.option('--momentum', '-m', default=0.9)
-@click.option('--snapshot', '-s', default=5000)
-@click.option('--downscale', type=int)
-@click.option('--resize_to', type=int, default=720)
-@click.option('--augmentation/--no-augmentation', default=False)
-@click.option('--adam/--sgd', default=False)
-@click.option('--small', type=int, default=2)
-@click.option('--preprocessing', default=False)
-@click.option('--force_split', default=False)
-@click.option('--fyu/--torch', default=False)
-@click.option('--crop_size', default=720)
-@click.option('--weights', type=click.Path(exists=True))
-@click.option('--model_weights', type=click.Path(exists=True))
-@click.option('--model', default='fcn8s', type=click.Choice(models.keys()))
-@click.option('--num_cls', default=19, type=int)
-@click.option('--nthreads', default=8, type=int)
-@click.option('--gpu', default='0')
-@click.option('--start_step', default=0)
-@click.option('--data_flag', default='', type=str)
-@click.option('--rundir_flag', default='', type=str)
-@click.option('--serial_batches', type=bool, default=False, help='if true, takes images in order to make batches, otherwise takes them randomly')
-def main(output, dataset, datadir, batch_size, lr, step, iterations,
-         momentum, snapshot, downscale, augmentation, fyu, crop_size,
-         weights, model, gpu, num_cls, nthreads, model_weights, data_flag,
-         serial_batches, resize_to, start_step, preprocessing, small, rundir_flag, force_split, adam):
+# @click.command()
+# @click.argument('output')
+# @click.option('--dataset', required=True, multiple=True)
+# @click.option('--datadir', default="", type=click.Path(exists=True))
+# @click.option('--batch_size', '-b', default=1)
+# @click.option('--lr', '-l', default=0.001)
+# @click.option('--step', type=int)
+# @click.option('--iterations', '-i', default=100000)
+# @click.option('--momentum', '-m', default=0.9)
+# @click.option('--snapshot', '-s', default=5000)
+# @click.option('--downscale', type=int)
+# @click.option('--resize_to', type=int, default=720)
+# @click.option('--augmentation/--no-augmentation', default=False)
+# @click.option('--adam/--sgd', default=False)
+# @click.option('--small', type=int, default=2)
+# @click.option('--preprocessing', default=False)
+# @click.option('--force_split', default=False)
+# @click.option('--fyu/--torch', default=False)
+# @click.option('--crop_size', default=720)
+# @click.option('--weights', type=click.Path(exists=True))
+# @click.option('--model_weights', type=click.Path(exists=True))
+# @click.option('--model', default='fcn8s', type=click.Choice(models.keys()))
+# @click.option('--num_cls', default=19, type=int)
+# @click.option('--nthreads', default=8, type=int)
+# @click.option('--gpu', default='0')
+# @click.option('--start_step', default=0)
+# @click.option('--data_flag', default='', type=str)
+# @click.option('--rundir_flag', default='', type=str)
+# @click.option('--serial_batches', type=bool, default=False, help='if true, takes images in order to make batches, otherwise takes them randomly')
+
+def main(output, dataset, datadir="", batch_size=1, lr=0.001, step=None, iterations=100000,
+         momentum=0.9, snapshot=5000, downscale=0, augmentation=False, fyu=False, crop_size=720,
+         weights=None, model='fcn8s', gpu='0', num_cls=19, nthreads=8, model_weights=None, data_flag='',
+         serial_batches=False, resize_to=720, start_step=0, preprocessing=False, small=2, rundir_flag='', force_split=False, adam=False):
 	if weights is not None:
 		raise RuntimeError("weights don't work because eric is bad at coding")
 	os.environ['CUDA_VISIBLE_DEVICES'] = gpu
@@ -129,8 +130,8 @@ def main(output, dataset, datadir, batch_size, lr, step, iterations,
 		datasets.append(
 			get_dataset(dataset[1], os.path.join(datadir, dataset[1]), num_cls=num_cls, transform=transform, target_transform=target_transform))
 	else:
-		datasets = [get_dataset(name, os.path.join(datadir, name), num_cls=num_cls, transform=transform, target_transform=target_transform,
-		                        data_flag=data_flag) for name in dataset]
+		datasets = [get_dataset(name, os.path.join(datadir, name), num_cls=num_cls, transform=transform, target_transform=target_transform) for name in dataset]
+		                        # data_flag=data_flag)
 	
 	if weights is not None:
 		weights = np.loadtxt(weights)
@@ -195,5 +196,29 @@ def main(output, dataset, datadir, batch_size, lr, step, iterations,
 			logging.info('Optimization complete.')
 
 
-if __name__ == '__main__':
-	main()
+# if __name__ == '__main__':
+# 	main()
+
+if __name__=="__main__":
+
+	gpu="0,1,2,3,4"
+	data = ["cyclesynthia"]
+	model = "fcn8s"
+	#model = "drn26"
+	os.environ["LC_ALL"] = "C.UTF-8"
+	os.environ["LANG"] = "C.UTF-8"
+	datadir ="/data/images"
+	batch=28
+	iterations = 20000
+	num_cls = 19
+	data_flag = "V4_SEM_Final_Scale"
+	MADAN_dir = "/users/danny.barash/MADAN"
+	sys.path.append(MADAN_dir)
+	os.chdir(MADAN_dir)
+	outdir = "/users/danny.barash/MADAN/cycada/results/{}/{}_{}/{}".format(data,data,data_flag,model)
+	nthreads=8
+	snapshot=2000
+	if not os.path.exists(outdir):
+		os.makedirs(outdir)
+	main(outdir, model=model,num_cls=num_cls,gpu=gpu,batch_size = batch, adam=True,iterations=iterations,
+		 datadir=datadir,snapshot=snapshot,small=1,dataset=data,data_flag=data_flag,nthreads=nthreads)

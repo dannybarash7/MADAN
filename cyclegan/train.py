@@ -2,7 +2,7 @@ import subprocess
 import sys
 import time
 
-sys.path.append("/nfs/project/libo_i/MADAN/cyclegan")
+sys.path.append("/users/danny.barash/MADAN/scripts/CycleGAN/")
 from options.train_options import TrainOptions
 from data import CreateDataLoader
 from models import create_model

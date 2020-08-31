@@ -84,37 +84,47 @@ class CycleSYNTHIA(data.Dataset):
 	
 	def collect_ids(self):
 		splits = []
+		try:
+			if self.data_flag:
+				pass
+		except AttributeError as e:
+			print(e,"assuming data_flag is False")
+			self.data_flag = False
 		if self.data_flag:
 			path = os.path.join(self.root, self.data_flag)
 		else:
-			path = os.path.join(self.root, 'Cycle')
+			path = os.path.join(self.root, 'RGB')
+
 		files = os.listdir(path)
 		for item in files:
 			fip = os.path.join(path, item)
-			if (fip.endswith('_fake_B_1.png') or fip.endswith('_fake_B.png')):
-				splits.append(fip.split('/')[-1])
-		
+			# if (fip.endswith('_fake_B_1.png') or fip.endswith('_fake_B.png')):
+			# 	splits.append(fip.split('/')[-1])
+			splits.append(os.path.join(fip.split('/')[-1]))
 		return splits
 	
 	def img_path(self, filename):
-		return os.path.join(self.root, filename)
+		return os.path.join(self.root,"RGB", filename)
 	
 	def label_path(self, filename):
 		# Case for loading images generated in multi-source cycle
 		# In this case, you will generate fake_B_1 for cyclesynthia dataset and fake_B_2 for cyclegta5
-		if filename.endswith('_fake_B_1.png'):
-			return os.path.join(self.root, 'GT', 'parsed_LABELS', filename.replace('_fake_B_1.png', '.png'))
-		elif filename.endswith('_fake_B.png'):
-			return os.path.join(self.root, 'GT', 'parsed_LABELS', filename.replace('_fake_B.png', '.png'))
+		# if filename.endswith('_fake_B_1.png'):
+		# 	return os.path.join(self.root, 'GT', 'parsed_LABELS', filename.replace('_fake_B_1.png', '.png'))
+		# elif filename.endswith('_fake_B.png'):
+		# 	return os.path.join(self.root, 'GT', 'parsed_LABELS', filename.replace('_fake_B.png', '.png'))
+		# else:
+		return os.path.join(self.root, 'GT', 'LABELS', filename)
 	
 	def __getitem__(self, index, debug=False):
 		id = self.ids[index]
 		img_path = self.img_path(id)
 		label_path = self.label_path(id)
-		img = Image.open(img_path).convert('RGB')
+		# img = Image.open(img_path).convert('RGB')
+		img = Image.open(img_path)
 		if self.transform is not None:
 			img = self.transform(img)
-		target = Image.open(label_path)
+		target = Image.open(label_path).convert('L')
 		if self.remap_labels:
 			target = np.asarray(target)
 			target = syn_relabel(target)
