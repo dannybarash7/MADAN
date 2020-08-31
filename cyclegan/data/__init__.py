@@ -1,7 +1,7 @@
 import sys
 
 from cyclegan.consts import MADAN_FOLDER
-sys.path.append(MADAN_FOLDER)
+sys.path.append('/users/danny.barash/MADAN')
 import torch.utils.data
 
 from cyclegan.data.base_data_loader import BaseDataLoader

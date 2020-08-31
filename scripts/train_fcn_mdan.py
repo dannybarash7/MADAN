@@ -16,7 +16,7 @@ from tensorboardX import SummaryWriter
 
 from cyclegan.consts import MADAN_FOLDER
 
-sys.path.append(MADAN_FOLDER)
+sys.path.append('/users/danny.barash/MADAN')
 
 from cycada.data.data_loader import get_fcn_dataset as get_dataset
 from cycada.models import get_model

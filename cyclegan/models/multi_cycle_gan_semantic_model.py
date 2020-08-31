@@ -9,7 +9,7 @@ from . import networks
 from .base_model import BaseModel
 from ..train import MADAN_FOLDER
 
-sys.path.append(MADAN_FOLDER)
+sys.path.append('/users/danny.barash/MADAN')
 from cycada.models import get_model
 
 

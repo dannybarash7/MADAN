@@ -4,7 +4,7 @@ import time
 
 #from cyclegan.consts import MADAN_FOLDER
 
-#sys.path.append(MADAN_FOLDER)
+#sys.path.append('/users/danny.barash/MADAN')
 sys.path.append('/users/danny.barash/MADAN')
 from cyclegan.options.train_options import TrainOptions
 from cyclegan.data import CreateDataLoader

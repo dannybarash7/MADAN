@@ -5,7 +5,7 @@ from torchvision.transforms import transforms
 
 from cyclegan.consts import MADAN_FOLDER
 
-sys.path.append(MADAN_FOLDER)
+sys.path.append('/users/danny.barash/MADAN')
 import json
 import click
 import numpy as np

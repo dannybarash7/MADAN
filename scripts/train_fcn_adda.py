@@ -14,7 +14,7 @@ from torch.autograd import Variable
 
 from cyclegan.consts import MADAN_FOLDER
 
-sys.path.append(MADAN_FOLDER)
+sys.path.append('/users/danny.barash/MADAN')
 
 from cycada.data.adda_datasets import AddaDataLoader
 from cycada.models import get_model
