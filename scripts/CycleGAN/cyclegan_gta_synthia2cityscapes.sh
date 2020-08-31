@@ -10,7 +10,3 @@ python3 train.py --name cyclegan_gta_synthia2cityscapes_noIdentity \
     --weights_gta /users/danny.barash/MADAN/pretrained_models/drn26_cycada_cyclegta2cityscapes.pth \
     --gpu 0,1,2,3 --semantic_loss
 
-
-
-
-
