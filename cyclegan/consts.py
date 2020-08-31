@@ -1,1 +1,1 @@
-MADAN_FOLDER = "/home/dannyb/Downloads/madan/MADAN/"
+MADAN_FOLDER = "/users/danny.barash/MADAN/"
