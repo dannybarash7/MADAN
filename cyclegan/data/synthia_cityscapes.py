@@ -97,9 +97,9 @@ class SynthiaCityscapesDataset(BaseDataset):
 		
 		A_label_path = self.A_labels[index % self.A_size]
 		B_label_path = self.B_labels[index_B]
-		
-		A_label = Image.open(A_label_path)
-		B_label = Image.open(B_label_path)
+		#danny: trying to fix "Too many dimensions: 3 > 2."
+		A_label = Image.open(A_label_path).convert('L')
+		B_label = Image.open(B_label_path).convert('L')
 		
 		A_label = np.asarray(A_label)
 		A_label = syn_relabel(A_label)

@@ -11,9 +11,10 @@ import torchvision
 from PIL import Image
 from tensorboardX import SummaryWriter
 
+sys.path.append("/home/dannyb/pytorch/madan/MADAN")
 from cyclegan.consts import MADAN_FOLDER
 
-sys.path.append(MADAN_FOLDER)
+
 
 from cycada.data.data_loader import get_fcn_dataset as get_dataset
 from cycada.models import get_model
@@ -95,7 +96,7 @@ def main(output, dataset, datadir, batch_size, lr, step, iterations,
 		net = get_model(model, num_cls=num_cls, weights_init=model_weights)
 	else:
 		net = get_model(model, num_cls=num_cls, finetune=True, weights_init=model_weights)
-	net.cuda()
+	#net.cuda()
 	
 	str_ids = gpu.split(',')
 	gpu_ids = []
@@ -110,7 +111,15 @@ def main(output, dataset, datadir, batch_size, lr, step, iterations,
 		assert (torch.cuda.is_available())
 		net.to(gpu_ids[0])
 		net = torch.nn.DataParallel(net, gpu_ids)
-	
+
+	#danny: run on cpu
+	if len(gpu_ids) == 0:
+		device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+		# torch.cuda.set_device(device)
+		net.to("cpu")
+		net = torch.nn.DataParallel(net, gpu_ids)
+
+
 	transform = []
 	target_transform = []
 	

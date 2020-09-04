@@ -2,7 +2,7 @@
 
 how_many=100000
 
-cd /root/MADAN/cyclegan
+cd /home/dannyb/Downloads/madan/MADAN/cyclegan
 name=$1
 epoch=$2
 
