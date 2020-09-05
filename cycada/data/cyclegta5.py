@@ -47,6 +47,7 @@ class CycleGTA5(GTA5):
 		target = Image.open(label_path).convert('L')
 
 		#danny why do we take labels with low res 600x1080 just to resize them back to 1280x760?
+		target = target.resize((1080,600), resample=Image.BILINEAR)
 		img = img.resize(target.size, resample=Image.BILINEAR)
 		if self.transform is not None:
 			img = self.transform(img)
