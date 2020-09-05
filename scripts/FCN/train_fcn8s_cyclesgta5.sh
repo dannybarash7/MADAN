@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-gpu=0,1,2,3
+gpu=0,1
 data=cyclegta5
 model=fcn8s
 
@@ -7,11 +7,11 @@ export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
 
 datadir=/data/images
-batch=8
+batch=4
 iterations=30000
 snapshot=2000
 num_cls=19
-data_flag=cyclegan_gta_synthia2cityscapes_noIdentity_TRAIN_60
+data_flag=cyclegan_gta_synthia2cityscapes_noIdentity_TRAIN_60/images
 
 cd /users/danny.barash/MADAN
 

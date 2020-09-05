@@ -30,24 +30,24 @@ class CycleGTA5(GTA5):
 		filename = self.ids[index]
 		if self.data_flag == '' or self.data_flag is None:
 			img_path = os.path.join(self.root, "images", filename)
-		else:
+		else: 
 			img_path = os.path.join(self.root, self.data_flag, filename)
 		
 		if self.data_flag == '' or self.data_flag is None:
 			label_path = os.path.join(self.root, 'labels_600x1080', filename)
-		else:
+		else:   #danny: correcting paths: fake labels need the special '_fake' filename ending.
 			#danny _fake_B ==> _fake_B_1
 			if filename.endswith('_fake_B_1.png'):
-				label_path = os.path.join(self.root, 'labels_600x1080', filename.replace('_fake_B_1.png', '.png'))
+				label_path = os.path.join(self.root, 'labels_600x1080', filename) #.replace('_fake_B_1.png', '.png'))
 			elif filename.endswith('_fake_B_2.png'):
-				label_path = os.path.join(self.root, 'labels_600x1080', filename.replace('_fake_B_2.png', '.png'))
+				label_path = os.path.join(self.root, 'labels_600x1080', filename) #.replace('_fake_B_2.png', '.png'))
 				
 		img = Image.open(img_path).convert('RGB')
 		#danny changed from target = Image.open(label_path)
 		target = Image.open(label_path).convert('L')
 
 		#danny why do we take labels with low res 600x1080 just to resize them back to 1280x760?
-		#img = img.resize(target.size, resample=Image.BILINEAR)
+		img = img.resize(target.size, resample=Image.BILINEAR)
 		if self.transform is not None:
 			img = self.transform(img)
 		if self.remap_labels:

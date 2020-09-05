@@ -11,7 +11,6 @@ import torchvision
 from PIL import Image
 from tensorboardX import SummaryWriter
 
-from cyclegan.consts import MADAN_FOLDER
 
 sys.path.append('/users/danny.barash/MADAN')
 
