@@ -36,14 +36,18 @@ class CycleGTA5(GTA5):
 		if self.data_flag == '' or self.data_flag is None:
 			label_path = os.path.join(self.root, 'labels_600x1080', filename)
 		else:
-			if filename.endswith('_fake_B.png'):
-				label_path = os.path.join(self.root, 'labels_600x1080', filename.replace('_fake_B.png', '.png'))
+			#danny _fake_B ==> _fake_B_1
+			if filename.endswith('_fake_B_1.png'):
+				label_path = os.path.join(self.root, 'labels_600x1080', filename.replace('_fake_B_1.png', '.png'))
 			elif filename.endswith('_fake_B_2.png'):
 				label_path = os.path.join(self.root, 'labels_600x1080', filename.replace('_fake_B_2.png', '.png'))
 				
 		img = Image.open(img_path).convert('RGB')
-		target = Image.open(label_path)
-		img = img.resize(target.size, resample=Image.BILINEAR)
+		#danny changed from target = Image.open(label_path)
+		target = Image.open(label_path).convert('L')
+
+		#danny why do we take labels with low res 600x1080 just to resize them back to 1280x760?
+		#img = img.resize(target.size, resample=Image.BILINEAR)
 		if self.transform is not None:
 			img = self.transform(img)
 		if self.remap_labels:

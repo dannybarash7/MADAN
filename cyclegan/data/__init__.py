@@ -1,7 +1,8 @@
 import sys
 
-from cyclegan.consts import MADAN_FOLDER
 sys.path.append('/users/danny.barash/MADAN')
+from cyclegan.consts import MADAN_FOLDER
+
 import torch.utils.data
 
 from cyclegan.data.base_data_loader import BaseDataLoader
@@ -17,16 +18,16 @@ def CreateDataLoader(opt):
 def CreateDataset(opt):
 	dataset = None
 	if opt.dataset_mode == 'synthia_cityscapes':
-		from data.synthia_cityscapes import SynthiaCityscapesDataset
+		from cyclegan.data.synthia_cityscapes import SynthiaCityscapesDataset
 		dataset = SynthiaCityscapesDataset()
 	elif opt.dataset_mode == 'gta5_cityscapes':
-		from data.gta5_cityscapes import GTAVCityscapesDataset
+		from cyclegan.data.gta5_cityscapes import GTAVCityscapesDataset
 		dataset = GTAVCityscapesDataset()
 	elif opt.dataset_mode == 'gta_synthia_cityscapes':
-		from data.gta_synthia_cityscapes import GTASynthiaCityscapesDataset
+		from cyclegan.data.gta_synthia_cityscapes import GTASynthiaCityscapesDataset
 		dataset = GTASynthiaCityscapesDataset()
 	elif opt.dataset_mode == 'merged_gta_synthia_cityscapes':
-		from data.merged_gta_synthia_cityscapes import MergedGTASynthiaCityscapesDataset
+		from cyclegan.data.merged_gta_synthia_cityscapes import MergedGTASynthiaCityscapesDataset
 		dataset = MergedGTASynthiaCityscapesDataset()
 	else:
 		raise ValueError("Dataset [%s] not recognized." % opt.dataset_mode)
