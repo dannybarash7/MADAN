@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-gpu=0,1
+gpu=0,1,2,3,4,5,6
 data=cyclegta5
 model=fcn8s
 
@@ -7,7 +7,7 @@ export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
 
 datadir=/data/images
-batch=4
+batch=21
 iterations=30000
 snapshot=2000
 num_cls=19
