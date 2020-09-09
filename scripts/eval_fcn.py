@@ -3,9 +3,9 @@ import sys
 
 from torchvision.transforms import transforms
 
+sys.path.append('/users/danny.barash/MADAN')
 from cyclegan.consts import MADAN_FOLDER
 
-sys.path.append('/users/danny.barash/MADAN')
 import json
 import click
 import numpy as np
@@ -54,11 +54,12 @@ def result_stats(hist):
 @click.option('--gpu', default='0')
 @click.option('--num_cls', default=19)
 @click.option('--batch_size', default=16)
-@click.option('--loadSize', default=None)
-@click.option('--fineSize', default=None)
-def main(path, dataset, datadir, model, gpu, num_cls, batch_size, loadSize, fineSize):
+@click.option('--loadsize', default=None)
+@click.option('--finesize', default=None)
+def main(path, dataset, datadir, model, gpu, num_cls, batch_size, loadsize, finesize):
 	os.environ['CUDA_VISIBLE_DEVICES'] = gpu
-	
+	loadSize=loadsize
+	fineSize=finesize
 	net = get_model(model, num_cls=num_cls, weights_init=path)
 	
 	str_ids = gpu.split(',')
